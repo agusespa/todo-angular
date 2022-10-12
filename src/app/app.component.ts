@@ -1,38 +1,42 @@
 import { Component } from "@angular/core";
+import { HttpService } from "./http.service";
 import { Item } from "./item";
+import { ItemDto } from "./itemDto";
 
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"],
+    selector: "app-root",
+    templateUrl: "./app.component.html",
+    styleUrls: ["./app.component.scss"],
 })
 export class AppComponent {
+    title = "tasks";
+   filter: "all" | "active" = "active";
 
-  title = "tasks";
+    items = new Array<Item>();
 
-  filter: "all" | "active" = "active";
+    constructor(private httpService: HttpService) {}
 
-  items = [
-    { title: "To do item 1", isDone: false },
-    { title: "To do item 2", isDone: true },
-    { title: "To do item 3", isDone: false },
-    { title: "To do item 4", isDone: true },
-  ];
+    ngOnInit() {
+        this.httpService.getTasks().subscribe(
+            (response) => {
+                this.items = response;
+            }
+        );
+    }
 
-  getItems() {
-    if (this.filter === "all") return this.items;
-    return this.items.filter((item) => item.isDone === false);
-  }
+    addItem(title: string) {
+        const itemDto: ItemDto = {
+            title,
+            isDone: false,
+        };
+        this.httpService.postTask(itemDto).subscribe(
+        (response) => {
+                this.items.push(response);
+    }
+        );
+    }
 
-  addItem(title: string) {
-    console.log(title);
-    this.items.push({
-      title,
-      isDone: false,
-    });
-  }
-
-  remove(item: Item) {
-    this.items.splice(this.items.indexOf(item), 1);
-  }
+    remove(item: Item) {
+        this.items.splice(this.items.indexOf(item), 1);
+    }
 }
