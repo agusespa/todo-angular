@@ -1,9 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { Observable, throwError } from "rxjs";
+import { catchError, retry } from "rxjs/operators";
 import { Item } from "./item";
-import {ItemDto} from "./itemDto";
+import { ItemDto } from "./itemDto";
 
 @Injectable({
     providedIn: "root",
@@ -23,5 +23,9 @@ export class HttpService {
 
     putTask(item: Item) {
         return this.http.put<Item>(this.url, item);
+    }
+
+    deleteTask(id: number) {
+        return this.http.delete(this.url + "/" + id);
     }
 }

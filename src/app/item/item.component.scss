@@ -1,0 +1,60 @@
+.item {
+    display: flex;
+    flex-direction: column;
+
+    .dataWrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .taskWrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+
+            .taskDone {
+                color: gray;
+                text-decoration: line-through;
+            }
+
+            .taskActive {
+                color: #f2f2f2f2;
+                text-decoration: none;
+                font-size: 1rem;
+                font-weight: 200;
+            }
+            
+            .dueDate {
+                font-size: 0.8rem;
+                color: #fc0303;
+                margin: 0;
+                padding: 0;
+            }
+        }
+
+        .btnWrapper {
+            display: flex;
+            gap: 0.3rem;
+        }
+    }
+
+    .editWrapper {
+        display: flex;
+        flex-direction: column;
+        margin: 0.3rem 0 0 0;
+
+        .task {
+            display: flex;
+            flex-direction: row;
+            margin: 0;
+            color: #f2f2f2f2;
+        }
+
+        .date {
+            display: flex;
+            flex-direction: row;
+            margin: 0;
+            color: #f2f2f2f2;
+        }
+    }
+}

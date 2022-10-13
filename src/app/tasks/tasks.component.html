@@ -1,0 +1,21 @@
+<main>
+   <h3>Tasks</h3>
+    <ul>
+        <li *ngFor="let i of filteredItems">
+            <app-item (remove)="remove(i)" (filterItems)="filterItems(filter)" [item]="i"></app-item>
+        </li>
+    </ul>
+    <div class="new-item-box">
+        <input
+            #newItem
+            placeholder="New item"
+            (keyup.enter)="addItem(newItem.value); newItem.value = ''"
+            class="lg-text-input"
+            id="addItemInput" />
+        <button
+            class="btn-primary"
+            (click)="addItem(newItem.value); newItem.value = ''">
+            Add
+        </button>
+    </div>
+</main>

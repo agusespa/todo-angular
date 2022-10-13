@@ -1,7 +1,6 @@
 export interface Item {
-    id: number,
-    title: string,
-    isDone: boolean,
-    details?: string,
-    dueDate?: string
+    id: number;
+    title: string;
+    done: boolean;
+    dueDate?: string;
 }

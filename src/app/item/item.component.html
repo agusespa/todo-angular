@@ -1,25 +1,47 @@
 <div class="item">
-    <input
-        [id]="item.title"
-        type="checkbox"
-        (change)="item.isDone = !item.isDone"
-        [checked]="item.isDone" />
-    <label [for]="item.title">{{ item.title }}</label>
-
-    <div class="btn-wrapper" *ngIf="!editable">
-        <button class="btn" (click)="editable = !editable">Edit</button>
-        <button class="btn btn-warn" (click)="remove.emit()">Delete</button>
+    <div class="dataWrapper">
+        <div class="taskWrapper">
+            <input
+                class="checkbox"
+                type="checkbox"
+                (change)="checkIsDone($event)"
+                [checked]="item.done" />
+            <label
+                [ngClass]="{
+                    taskDone: item.done === true,
+                    taskActive: item.done === false
+                }"
+                [for]="item.title"
+                >{{ item.title }}</label
+            >
+            <p class="dueDate" *ngIf="item.dueDate">{{ item.dueDate }}</p>
+        </div>
+        <div class="btnWrapper" *ngIf="!editable">
+            <button class="btn" (click)="editable = !editable">Edit</button>
+            <button class="btn btn-warn" (click)="remove.emit()">Delete</button>
+        </div>
     </div>
 
-    <div *ngIf="editable">
-        <input
-            class="sm-text-input"
-            placeholder="edit item"
-            [value]="item.title"
-            #editedItem
-            (keyup.enter)="saveItem(editedItem.value)" />
-
-        <div class="btn-wrapper">
+    <div *ngIf="editable" class="editWrapper">
+        <div class="task">
+            <label for="taskInput">Title:</label>
+            <input
+                class="taskInput"
+                placeholder="edit item"
+                [value]="item.title"
+                #editedItem
+                (keyup.enter)="saveItem(editedItem.value)" />
+        </div>
+        <div class="date">
+            <div class="newDate">
+                <label for="dueDate">Due date:</label>
+                <input
+                    type="date"
+                    [value]="item.dueDate"
+                    (change)="setDate($event)" />
+            </div>
+        </div>
+        <div class="btnWrapper">
             <button class="btn" (click)="editable = !editable">Cancel</button>
             <button class="btn btn-save" (click)="saveItem(editedItem.value)">
                 Save

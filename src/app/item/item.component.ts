@@ -7,7 +7,8 @@ import { Item } from "../item";
     templateUrl: "./item.component.html",
     styleUrls: ["./item.component.scss"],
 })
-export class ItemComponent implements OnInit {   editable = false;
+export class ItemComponent implements OnInit {
+    editable = false;
 
     @Input() item!: Item;
     @Output() remove = new EventEmitter<Item>();
@@ -16,12 +17,21 @@ export class ItemComponent implements OnInit {   editable = false;
 
     ngOnInit(): void {}
 
-    saveItem(title: string) {
-        if (!title) return;
-
+    saveItem(title: string): void {
         this.item.title = title;
         this.httpService.putTask(this.item).subscribe();
 
         this.editable = false;
+    }
+
+    checkIsDone(event: Event): void {
+        const status = (<HTMLInputElement>event.target).checked;
+        this.item.done = status;
+        this.httpService.putTask(this.item).subscribe();
+    }
+
+    setDate(event: Event): void {
+        const date = (<HTMLInputElement>event.target).value;
+        this.item.dueDate = date;
     }
 }
