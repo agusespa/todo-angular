@@ -10,7 +10,7 @@ import { Item } from "../item";
 export class ItemComponent implements OnInit {
     editable = false;
 
-    @Input() item!: Item;
+    @Input() item: Item = {} as Item;
     @Output() remove = new EventEmitter<Item>();
 
     constructor(private httpService: HttpService) {}

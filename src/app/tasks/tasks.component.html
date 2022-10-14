@@ -9,12 +9,14 @@
 <main>
     <h3>Tasks</h3>
     <ul>
-        <li *ngFor="let i of filteredItems">
-            <app-item
-                (remove)="remove(i)"
-                (filterItems)="filterItems('all')"
-                [item]="i"></app-item>
-        </li>
+        <ng-container *ngFor="let i of filteredItems">
+            <li>
+                <app-item
+                    (remove)="remove(i)"
+                    (filterItems)="filterItems('all')"
+                    [item]="i"></app-item>
+            </li>
+        </ng-container>
     </ul>
     <div class="new-item-box">
         <input
