@@ -9,9 +9,6 @@ import { ItemDto } from "../itemDto";
     styleUrls: ["./tasks.component.scss"],
 })
 export class TasksComponent implements OnInit {
-
-    filter: "all" | "active" | "completed" | "today" | "overdue" = "all";
-
     items = new Array<Item>();
 
     filteredItems = new Array<Item>();
@@ -25,13 +22,31 @@ export class TasksComponent implements OnInit {
         });
     }
 
-    filterItems(filter: "all" | "active" | "completed" | "today" | "overdue") {
+    filterItems(filter: string): void {
         if (filter === "active")
             this.filteredItems = this.items.filter((i) => i.done === false);
         else if (filter === "completed")
             this.filteredItems = this.items.filter((i) => i.done === true);
         else if (filter === "today") {
+            const currentDate = new Date();
+            this.filteredItems = this.items.filter(
+                (i) =>
+                    i.done === false &&
+                    i.dueDate !== null &&
+                    i.dueDate !== undefined &&
+                    new Date(i.dueDate).setHours(0, 0, 0, 0) ===
+                        currentDate.setHours(0, 0, 0, 0)
+            );
         } else if (filter === "overdue") {
+            const currentDate = new Date();
+            this.filteredItems = this.items.filter(
+                (i) =>
+                    i.done === false &&
+                    i.dueDate !== null &&
+                    i.dueDate !== undefined &&
+                    new Date(i.dueDate).setHours(0, 0, 0, 0) <
+                        currentDate.setHours(0, 0, 0, 0)
+            );
         } else this.filteredItems = this.items;
     }
 
