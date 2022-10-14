@@ -5,7 +5,7 @@
             activeFilter: activeFilter === 'today',
             inactiveFilter: activeFilter !== 'today'
         }">
-        Today
+        Today {{ itemSummary.today }}
     </button>
     <button
         (click)="filterItems('active')"
@@ -13,7 +13,7 @@
             activeFilter: activeFilter === 'active',
             inactiveFilter: activeFilter !== 'active'
         }">
-        Active
+        Active {{ itemSummary.active }}
     </button>
     <button
         (click)="filterItems('all')"
@@ -21,7 +21,7 @@
             activeFilter: activeFilter === 'all',
             inactiveFilter: activeFilter !== 'all'
         }">
-        All
+        All {{ itemSummary.all }}
     </button>
     <button
         (click)="filterItems('overdue')"
@@ -29,7 +29,7 @@
             activeFilter: activeFilter === 'overdue',
             inactiveFilter: activeFilter !== 'overdue'
         }">
-        Overdue
+        Overdue {{ itemSummary.overdue }}
     </button>
     <button
         (click)="filterItems('completed')"
@@ -37,6 +37,6 @@
             activeFilter: activeFilter === 'completed',
             inactiveFilter: activeFilter !== 'completed'
         }">
-        Completed
+        Completed {{ itemSummary.completed }}
     </button>
 </nav>
