@@ -1,2 +1,42 @@
-
-
+<nav>
+    <button
+        (click)="filterItems('today')"
+        [ngClass]="{
+            activeFilter: activeFilter === 'today',
+            inactiveFilter: activeFilter !== 'today'
+        }">
+        Today
+    </button>
+    <button
+        (click)="filterItems('active')"
+        [ngClass]="{
+            activeFilter: activeFilter === 'active',
+            inactiveFilter: activeFilter !== 'active'
+        }">
+        Active
+    </button>
+    <button
+        (click)="filterItems('all')"
+        [ngClass]="{
+            activeFilter: activeFilter === 'all',
+            inactiveFilter: activeFilter !== 'all'
+        }">
+        All
+    </button>
+    <button
+        (click)="filterItems('overdue')"
+        [ngClass]="{
+            activeFilter: activeFilter === 'overdue',
+            inactiveFilter: activeFilter !== 'overdue'
+        }">
+        Overdue
+    </button>
+    <button
+        (click)="filterItems('completed')"
+        [ngClass]="{
+            activeFilter: activeFilter === 'completed',
+            inactiveFilter: activeFilter !== 'completed'
+        }">
+        Completed
+    </button>
+</nav>

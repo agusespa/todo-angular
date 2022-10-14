@@ -6,13 +6,16 @@ import { Component, EventEmitter, OnInit, Output } from "@angular/core";
     styleUrls: ["./sidebar.component.scss"],
 })
 export class SidebarComponent implements OnInit {
-    @Output() filterItems = new EventEmitter<string>();
+    @Output() filterClick = new EventEmitter<string>();
+
+    activeFilter: string = "all";
 
     constructor() {}
 
     ngOnInit(): void {}
 
-    addFilterHandler(filter: string) {
-        this.filterItems.emit();
+    filterItems(filter: string) {
+        this.activeFilter = filter;
+        this.filterClick.emit(filter);
     }
 }

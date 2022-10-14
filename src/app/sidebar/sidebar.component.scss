@@ -1,9 +1,28 @@
 nav {
     display: flex;
     flex-direction: column;
-    width: 30%;
+    padding: 0.4rem;
+    gap: 0.7rem;
+    border-radius: 0.5rem;
+    background-color: gray;
 
-    a {
-        color: wheat;
+    button {
+        color: white;
+        padding: 0.7rem;
+        border: none;
+        border-radius: 0.3rem;
+        cursor: pointer;
+        &:hover {
+            background-color: #994d00;
+        }
+    }
+
+    .activeFilter {
+        cursor: default;
+        background-color: #994d00;
+    }
+
+    .inactiveFilter {
+        background-color: #cc6600;
     }
 }
