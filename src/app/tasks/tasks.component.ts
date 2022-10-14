@@ -11,7 +11,7 @@ import { ItemDto } from "../itemDto";
 export class TasksComponent implements OnInit {
     items = new Array<Item>();
 
-    filter= '';
+    filter = '';
 
     filteredItems = new Array<Item>();
 
