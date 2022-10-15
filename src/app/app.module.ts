@@ -11,6 +11,7 @@ import { StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { environment } from "../environments/environment";
 import { EffectsModule } from "@ngrx/effects";
+import { tasksReducer } from "./store/reducer";
 
 @NgModule({
     declarations: [
@@ -23,7 +24,7 @@ import { EffectsModule } from "@ngrx/effects";
         BrowserModule,
         HttpClientModule,
         MatIconModule,
-        StoreModule.forRoot({}, {}),
+        StoreModule.forRoot({items: tasksReducer}),
         StoreDevtoolsModule.instrument({
             maxAge: 25,
             logOnly: environment.production,

@@ -1,9 +1,9 @@
-import { createReducer, createSelector, on } from "@ngrx/store";
+import {createReducer, createSelector, on} from "@ngrx/store";
 import * as TasksActions from "./actions";
-import { Item } from "../item";
+import {Item} from "../item";
 
 export interface State {
-    items: Array<Item>;
+    items: Item[];
 }
 
 export const initialState: State = {
@@ -12,19 +12,19 @@ export const initialState: State = {
 
 export const tasksReducer = createReducer(
     initialState,
-    on(TasksActions.loadItems, (state, { response }) => ({
+    on(TasksActions.loadItems, (state, {response}) => ({
         ...state,
         items: response,
     })),
-    on(TasksActions.createItem, (state, { response }) => ({
+    on(TasksActions.createItem, (state, {response}) => ({
         ...state,
         items: state.items.concat(response),
     })),
-    on(TasksActions.deleteItem, (state, { id }) => ({
+    on(TasksActions.deleteItem, (state, {id}) => ({
         ...state,
         items: removeItemFromList(state.items, id),
     })),
-    on(TasksActions.editItem, (state, { id, item }) => ({
+    on(TasksActions.editItem, (state, {id, item}) => ({
         ...state,
         items: updateItemDetails(state.items, id, item),
     }))
