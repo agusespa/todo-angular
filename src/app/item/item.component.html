@@ -2,17 +2,17 @@
     <div class="dataWrapper">
         <div class="taskWrapper">
             <input
-                class="checkbox"
-                type="checkbox"
-                (change)="checkIsDone($event)"
-                [checked]="item.done" />
+                    class="checkbox"
+                    type="checkbox"
+                    (change)="checkIsDone($event)"
+                    [checked]="item.done"/>
             <label
-                [ngClass]="{
+                    [ngClass]="{
                     taskDone: item.done === true,
                     taskActive: item.done === false
                 }"
-                [for]="item.title"
-                >{{ item.title }}</label
+                    [for]="item.title"
+            >{{ item.title }}</label
             >
             <p class="dueDate" *ngIf="item.dueDate">{{ item.dueDate }}</p>
         </div>
@@ -26,19 +26,20 @@
         <div class="task">
             <label for="taskInput">Title:</label>
             <input
-                class="taskInput"
-                placeholder="edit item"
-                [value]="item.title"
-                #editedItem
-                (keyup.enter)="saveItem(editedItem.value)" />
+                    id="taskInput"
+                    placeholder="edit item"
+                    [value]="item.title"
+                    #editedItem
+                    (keyup.enter)="saveItem(editedItem.value)"/>
         </div>
         <div class="date">
             <div class="newDate">
                 <label for="dueDate">Due date:</label>
                 <input
-                    type="date"
-                    [value]="item.dueDate"
-                    (change)="setDate($event)" />
+                        id="dueDate"
+                        type="date"
+                        [value]="item.dueDate"
+                        (change)="setDate($event)"/>
             </div>
         </div>
         <div class="btnWrapper">
