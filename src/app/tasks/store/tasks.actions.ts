@@ -18,5 +18,5 @@ export const deleteItem = createAction(
 
 export const editItem = createAction(
     "[Tasks] Edit todo item",
-    props<{ id: number; item: Item }>()
+    props<{ item: Item }>()
 );

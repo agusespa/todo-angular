@@ -3,8 +3,8 @@ import {Store} from "@ngrx/store";
 import {HttpService} from "../../http.service";
 import {Item} from "../item/item";
 import {ItemDto} from "../item/itemDto";
-import {createItem, loadItems} from "../store/tasks.actions";
-import {State} from "../store/tasks.reducer";
+import {createItem, deleteItem, loadItems} from "../store/tasks.actions";
+import {getAllTasks, State} from "../store/tasks.reducer";
 
 @Component({
     selector: "app-tasks",
@@ -15,7 +15,7 @@ export class TaskList implements OnInit {
 
     currentDate = new Date();
 
-    items = [];
+    items: Item[] = [];
 
     constructor(
         private httpService: HttpService,
@@ -27,6 +27,8 @@ export class TaskList implements OnInit {
             this.store.dispatch(loadItems({response}));
         });
 
+        this.store.select(getAllTasks).subscribe(
+            allTasks => this.items = allTasks);
     }
 
     //filterItems(filter: string): void {
@@ -51,9 +53,9 @@ export class TaskList implements OnInit {
     }
 
     remove(item: Item): void {
-        this.httpService.deleteTask(item.id).subscribe();
-        //this.buildItemSummary();
-        //this.items.splice(this.items.indexOf(item), 1);
+        const id = item.id;
+        this.httpService.deleteTask(id).subscribe();
+        this.store.dispatch(deleteItem({id}));
     }
 
     //getActiveItems(): Item[] {

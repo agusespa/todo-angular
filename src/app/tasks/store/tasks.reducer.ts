@@ -1,4 +1,4 @@
-import {createReducer, createSelector, on} from "@ngrx/store";
+import {createFeatureSelector, createReducer, createSelector, on} from "@ngrx/store";
 import * as TasksActions from "./tasks.actions";
 import {Item} from "../item/item";
 import * as AppState from "../../app.state";
@@ -29,9 +29,9 @@ export const tasksReducer = createReducer<TasksState>(
         ...state,
         items: removeItemFromList(state.items, id),
     })),
-    on(TasksActions.editItem, (state, {id, item}) => ({
+    on(TasksActions.editItem, (state, {item}) => ({
         ...state,
-        items: updateItemDetails(state.items, id, item),
+        items: updateItemDetails(state.items, item),
     }))
 );
 
@@ -41,12 +41,18 @@ function removeItemFromList(list: Item[], id: number): Item[] {
     });
 }
 
-function updateItemDetails(list: Item[], id: number, editedItem: Item): Item[] {
+function updateItemDetails(list: Item[], editedItem: Item): Item[] {
     return list.map((i) => {
-        if (i.id === id) {
+        if (i.id === editedItem.id) {
             return editedItem;
         } else {
             return i;
         }
     });
 }
+
+const getTasksFeatureState = createFeatureSelector<TasksState>('tasks');
+export const getAllTasks = createSelector(
+    getTasksFeatureState,
+    state => state.items
+)

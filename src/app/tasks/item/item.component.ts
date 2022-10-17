@@ -1,6 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import {Store} from "@ngrx/store";
 import { HttpService } from "../../http.service";
 import { Item } from "./item";
+import {State} from "../store/tasks.reducer";
+import {editItem} from "../store/tasks.actions";
 
 @Component({
     selector: "app-item",
@@ -13,12 +16,14 @@ export class ItemComponent implements OnInit {
     @Input() item: Item = {} as Item;
     @Output() remove = new EventEmitter<Item>();
 
-    constructor(private httpService: HttpService) {}
+    constructor(private httpService: HttpService, private store: Store<State>) {}
 
     ngOnInit(): void {}
 
     saveItem(title: string): void {
         this.item.title = title;
+        const item = this.item;
+        this.store.dispatch(editItem({item}));
         this.httpService.putTask(this.item).subscribe();
 
         this.editable = false;
@@ -27,6 +32,8 @@ export class ItemComponent implements OnInit {
     checkIsDone(event: Event): void {
         const status = (<HTMLInputElement>event.target).checked;
         this.item.done = status;
+        const item = this.item;
+        this.store.dispatch(editItem({item}));
         this.httpService.putTask(this.item).subscribe();
     }
 
