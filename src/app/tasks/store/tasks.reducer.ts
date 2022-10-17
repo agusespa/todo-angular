@@ -9,29 +9,36 @@ export interface State extends AppState.State {
 
 export interface TasksState {
     items: Item[];
+    error: string;
 }
 
 export const initialState: TasksState = {
     items: [],
+    error: "",
 };
 
 export const tasksReducer = createReducer<TasksState>(
     initialState,
-    on(TasksActions.loadItems, (state, {response}) => ({
+    on(TasksActions.loadItemsSuccess, (state, action): TasksState => ({
         ...state,
-        items: response,
+        items: action.tasks,
     })),
-    on(TasksActions.createItem, (state, {response}) => ({
+    on(TasksActions.loadItemsFailure, (state, action): TasksState => ({
         ...state,
-        items: state.items.concat(response),
+        items: [],
+        error: action.error
     })),
-    on(TasksActions.deleteItem, (state, {id}) => ({
+    on(TasksActions.createItem, (state, action): TasksState => ({
         ...state,
-        items: removeItemFromList(state.items, id),
+        items: state.items.concat(action.response),
     })),
-    on(TasksActions.editItem, (state, {item}) => ({
+    on(TasksActions.deleteItem, (state, action): TasksState => ({
         ...state,
-        items: updateItemDetails(state.items, item),
+        items: removeItemFromList(state.items, action.id),
+    })),
+    on(TasksActions.editItem, (state, action): TasksState => ({
+        ...state,
+        items: updateItemDetails(state.items, action.item),
     }))
 );
 
@@ -55,4 +62,7 @@ const getTasksFeatureState = createFeatureSelector<TasksState>('tasks');
 export const getAllTasks = createSelector(
     getTasksFeatureState,
     state => state.items
-)
+);
+
+export const getError = createSelector(getTasksFeatureState,
+    (state) => state.error);

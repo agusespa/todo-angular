@@ -1,10 +1,11 @@
-import {Component, OnInit, OnChanges, SimpleChanges} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {Store} from "@ngrx/store";
-import {HttpService} from "../../http.service";
+import {TasksService} from "../tasks.service";
 import {Item} from "../item/item";
 import {ItemDto} from "../item/itemDto";
-import {createItem, deleteItem, loadItems} from "../store/tasks.actions";
-import {getAllTasks, State} from "../store/tasks.reducer";
+import * as TasksActions from "../store/tasks.actions";
+import {getAllTasks, getError, State} from "../store/tasks.reducer";
+import {Observable} from "rxjs";
 
 @Component({
     selector: "app-tasks",
@@ -15,20 +16,21 @@ export class TaskList implements OnInit {
 
     currentDate = new Date();
 
-    items: Item[] = [];
+    items$: Observable<Item[]>;
+    errorMessage$: Observable<string>;
 
     constructor(
-        private httpService: HttpService,
+        private httpService: TasksService,
         private store: Store<State>
-    ) {}
+    ) {
+    }
 
     ngOnInit() {
-        this.httpService.getTasks().subscribe((response) => {
-            this.store.dispatch(loadItems({response}));
-        });
+        this.items$ = this.store.select(getAllTasks);
 
-        this.store.select(getAllTasks).subscribe(
-            allTasks => this.items = allTasks);
+        this.errorMessage$ = this.store.select(getError);
+
+        this.store.dispatch(TasksActions.loadItems());
     }
 
     //filterItems(filter: string): void {
@@ -48,14 +50,14 @@ export class TaskList implements OnInit {
             done: false,
         };
         this.httpService.postTask(itemDto).subscribe((response) => {
-            this.store.dispatch(createItem({response}));
+            this.store.dispatch(TasksActions.createItem({response}));
         });
     }
 
     remove(item: Item): void {
         const id = item.id;
         this.httpService.deleteTask(id).subscribe();
-        this.store.dispatch(deleteItem({id}));
+        this.store.dispatch(TasksActions.deleteItem({id}));
     }
 
     //getActiveItems(): Item[] {

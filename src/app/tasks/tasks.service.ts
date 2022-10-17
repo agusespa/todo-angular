@@ -1,18 +1,21 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Item } from "./tasks/item/item";
-import { ItemDto } from "./tasks/item/itemDto";
+import { Item } from "./item/item";
+import { ItemDto } from "./item/itemDto";
+import {catchError, Observable, tap} from "rxjs";
 
 @Injectable({
     providedIn: "root",
 })
-export class HttpService {
+export class TasksService {
     private url = "http://localhost:8080/tasks";
 
     constructor(private http: HttpClient) {}
 
-    getTasks() {
-        return this.http.get<Item[]>(this.url);
+    getTasks(): Observable<Item[]> {
+        return this.http.get<Item[]>(this.url).pipe(
+            tap(data => console.log(data))
+        );
     }
 
     postTask(item: ItemDto) {

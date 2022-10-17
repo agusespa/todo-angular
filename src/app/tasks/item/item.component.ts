@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import {Store} from "@ngrx/store";
-import { HttpService } from "../../http.service";
+import { TasksService } from "../tasks.service";
 import { Item } from "./item";
 import {State} from "../store/tasks.reducer";
 import {editItem} from "../store/tasks.actions";
@@ -16,7 +16,7 @@ export class ItemComponent implements OnInit {
     @Input() item: Item = {} as Item;
     @Output() remove = new EventEmitter<Item>();
 
-    constructor(private httpService: HttpService, private store: Store<State>) {}
+    constructor(private httpService: TasksService, private store: Store<State>) {}
 
     ngOnInit(): void {}
 

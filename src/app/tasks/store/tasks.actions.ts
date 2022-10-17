@@ -2,8 +2,15 @@ import { createAction, props } from "@ngrx/store";
 import { Item } from "../item/item";
 
 export const loadItems = createAction(
-    "[Tasks] Fetch data from API",
-    props<{ response: Item[] }>()
+    "[Tasks] Fetch data from API"
+);
+export const loadItemsSuccess = createAction(
+    "[Tasks] Fetch data from API Success",
+    props<{ tasks: Item[] }>()
+);
+export const loadItemsFailure = createAction(
+    "[Tasks] Fetch data from API Fail",
+    props<{ error: string }>()
 );
 
 export const createItem = createAction(
