@@ -1,34 +1,32 @@
 import {Component, OnInit, OnChanges, SimpleChanges} from "@angular/core";
-import {select, Store} from "@ngrx/store";
-import {HttpService} from "../http.service";
-import {Item} from "../item";
-import {ItemDto} from "../itemDto";
-import {createItem, loadItems} from "../store/actions";
-import {State} from "../store/reducer";
-import {getTodoItems} from "../store/selectors";
-import {Observable} from "rxjs";
+import {Store} from "@ngrx/store";
+import {HttpService} from "../../http.service";
+import {Item} from "../item/item";
+import {ItemDto} from "../item/itemDto";
+import {createItem, loadItems} from "../store/tasks.actions";
+import {State} from "../store/tasks.reducer";
 
 @Component({
     selector: "app-tasks",
-    templateUrl: "./tasks.component.html",
-    styleUrls: ["./tasks.component.scss"],
+    templateUrl: "./task-list.component.html",
+    styleUrls: ["./task-list.component.scss"],
 })
-export class TasksComponent implements OnInit {
-    items$: Observable<Item[]>;
+export class TaskList implements OnInit {
 
     currentDate = new Date();
+
+    items = [];
 
     constructor(
         private httpService: HttpService,
         private store: Store<State>
-    ) {
-        this.items$ = this.store.pipe(select(getTodoItems));
-    }
+    ) {}
 
     ngOnInit() {
         this.httpService.getTasks().subscribe((response) => {
             this.store.dispatch(loadItems({response}));
         });
+
     }
 
     //filterItems(filter: string): void {

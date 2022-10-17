@@ -1,16 +1,21 @@
 import {createReducer, createSelector, on} from "@ngrx/store";
-import * as TasksActions from "./actions";
-import {Item} from "../item";
+import * as TasksActions from "./tasks.actions";
+import {Item} from "../item/item";
+import * as AppState from "../../app.state";
 
-export interface State {
+export interface State extends AppState.State {
+    tasks: TasksState
+}
+
+export interface TasksState {
     items: Item[];
 }
 
-export const initialState: State = {
+export const initialState: TasksState = {
     items: [],
 };
 
-export const tasksReducer = createReducer(
+export const tasksReducer = createReducer<TasksState>(
     initialState,
     on(TasksActions.loadItems, (state, {response}) => ({
         ...state,

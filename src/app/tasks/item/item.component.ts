@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { HttpService } from "../http.service";
-import { Item } from "../item";
+import { HttpService } from "../../http.service";
+import { Item } from "./item";
 
 @Component({
     selector: "app-item",

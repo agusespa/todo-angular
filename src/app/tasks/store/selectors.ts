@@ -1,6 +1,6 @@
 import {createSelector} from "@ngrx/store";
-import {Item} from "../item";
-import {State} from "./reducer";
+import {Item} from "../item/item";
+import {State} from "./tasks.reducer";
 
 export const selectAllItems = (state: State) => state.items;
 export const getTodoItems = createSelector(

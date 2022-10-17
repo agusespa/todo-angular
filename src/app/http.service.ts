@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Item } from "./item";
-import { ItemDto } from "./itemDto";
+import { Item } from "./tasks/item/item";
+import { ItemDto } from "./tasks/item/itemDto";
 
 @Injectable({
     providedIn: "root",

@@ -7,7 +7,7 @@ import {
     OnChanges,
     SimpleChanges,
 } from "@angular/core";
-import { ItemSummary } from "../itemSummary";
+import {ItemSummary} from "../item/itemSummary";
 
 @Component({
     selector: "app-sidebar",
@@ -20,9 +20,11 @@ export class SidebarComponent implements OnInit, OnChanges {
 
     activeFilter: string = "all";
 
-    constructor() {}
+    constructor() {
+    }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+    }
 
     ngOnChanges(changes: SimpleChanges) {
         this.itemSummary = this.itemSummary;
