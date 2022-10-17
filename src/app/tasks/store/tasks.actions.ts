@@ -1,5 +1,6 @@
 import { createAction, props } from "@ngrx/store";
 import { Item } from "../item/item";
+import {ItemDto} from "../item/itemDto";
 
 export const loadItems = createAction(
     "[Tasks] Fetch data from API"
@@ -14,16 +15,41 @@ export const loadItemsFailure = createAction(
 );
 
 export const createItem = createAction(
-    "[Tasks] Set new todo list item",
-    props<{ response: Item }>()
+    "[Tasks] New item",
+    props<{ itemDto: ItemDto }>()
+);
+export const createItemSuccess = createAction(
+    "[Tasks] New Item Success",
+    props<{ item: Item }>()
+);
+export const createItemFailure = createAction(
+    "[Tasks] New Item Fail",
+    props<{ error: string }>()
 );
 
 export const deleteItem = createAction(
-    "[Tasks] Delete todo item",
+    "[Tasks] Delete Task",
     props<{ id: number }>()
+);
+export const deleteItemSuccess = createAction(
+    '[Tasks] Delete Task Success',
+    props<{ id: number }>()
+);
+export const deleteItemFailure = createAction(
+    '[Tasks] Delete Task Failure',
+    props<{ error: string }>()
 );
 
 export const editItem = createAction(
     "[Tasks] Edit todo item",
     props<{ item: Item }>()
+);
+export const editItemSuccess = createAction(
+    '[Tasks] Edit item Success',
+    props<{ item: Item }>()
+);
+
+export const editItemFailure = createAction(
+    '[Tasks] Edit item Failure',
+    props<{ error: string }>()
 );

@@ -14,13 +14,14 @@ export class TasksService {
 
     getTasks(): Observable<Item[]> {
         return this.http.get<Item[]>(this.url).pipe(
-            tap(data => console.log(JSON.stringify(data))),
             catchError(this.handleError)
         );
     }
 
-    postTask(item: ItemDto) {
-        return this.http.post<Item>(this.url, item);
+    postTask(item: ItemDto): Observable<Item> {
+        return this.http.post<Item>(this.url, item).pipe(
+            catchError(this.handleError)
+        );
     }
 
     putTask(item: Item) {

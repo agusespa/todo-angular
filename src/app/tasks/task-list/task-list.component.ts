@@ -45,15 +45,12 @@ export class TaskList implements OnInit {
             title,
             done: false,
         };
-        // this.httpService.postTask(itemDto).subscribe((response) => {
-        //     this.store.dispatch(TasksActions.createItem({response}));
-        // });
+        this.store.dispatch(TasksActions.createItem({itemDto}));
     }
 
     remove(item: Item): void {
         const id = item.id;
-        // this.httpService.deleteTask(id).subscribe();
-        // this.store.dispatch(TasksActions.deleteItem({id}));
+        this.store.dispatch(TasksActions.deleteItem({id}));
     }
 
     //getActiveItems(): Item[] {

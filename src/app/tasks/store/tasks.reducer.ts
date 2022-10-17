@@ -28,9 +28,13 @@ export const tasksReducer = createReducer<TasksState>(
         items: [],
         error: action.error
     })),
-    on(TasksActions.createItem, (state, action): TasksState => ({
+    on(TasksActions.createItemSuccess, (state, action): TasksState => ({
         ...state,
-        items: state.items.concat(action.response),
+        items: state.items.concat(action.item),
+    })),
+    on(TasksActions.createItemFailure, (state, action): TasksState => ({
+        ...state,
+        error: action.error
     })),
     on(TasksActions.deleteItem, (state, action): TasksState => ({
         ...state,
