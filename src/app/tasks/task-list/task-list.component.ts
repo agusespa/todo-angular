@@ -1,6 +1,5 @@
 import {Component, OnInit} from "@angular/core";
 import {Store} from "@ngrx/store";
-import {TasksService} from "../tasks.service";
 import {Item} from "../item/item";
 import {ItemDto} from "../item/itemDto";
 import * as TasksActions from "../store/tasks.actions";
@@ -19,10 +18,7 @@ export class TaskList implements OnInit {
     items$: Observable<Item[]>;
     errorMessage$: Observable<string>;
 
-    constructor(
-        private httpService: TasksService,
-        private store: Store<State>
-    ) {
+    constructor(private store: Store<State>) {
     }
 
     ngOnInit() {
@@ -49,15 +45,15 @@ export class TaskList implements OnInit {
             title,
             done: false,
         };
-        this.httpService.postTask(itemDto).subscribe((response) => {
-            this.store.dispatch(TasksActions.createItem({response}));
-        });
+        // this.httpService.postTask(itemDto).subscribe((response) => {
+        //     this.store.dispatch(TasksActions.createItem({response}));
+        // });
     }
 
     remove(item: Item): void {
         const id = item.id;
-        this.httpService.deleteTask(id).subscribe();
-        this.store.dispatch(TasksActions.deleteItem({id}));
+        // this.httpService.deleteTask(id).subscribe();
+        // this.store.dispatch(TasksActions.deleteItem({id}));
     }
 
     //getActiveItems(): Item[] {

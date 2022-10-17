@@ -14,7 +14,7 @@ export class TasksEffects {
         return this.actions$.pipe(
             ofType(TasksActions.loadItems),
             mergeMap(() => this.tasksService.getTasks().pipe(
-                map(tasks => TasksActions.loadItemsSuccess({tasks})),
+                map(items => TasksActions.loadItemsSuccess({items})),
                 catchError(error => of(TasksActions.loadItemsFailure({ error })))
             ))
         )

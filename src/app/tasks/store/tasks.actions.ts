@@ -6,7 +6,7 @@ export const loadItems = createAction(
 );
 export const loadItemsSuccess = createAction(
     "[Tasks] Fetch data from API Success",
-    props<{ tasks: Item[] }>()
+    props<{ items: Item[] }>()
 );
 export const loadItemsFailure = createAction(
     "[Tasks] Fetch data from API Fail",

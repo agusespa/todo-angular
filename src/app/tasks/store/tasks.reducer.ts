@@ -21,7 +21,7 @@ export const tasksReducer = createReducer<TasksState>(
     initialState,
     on(TasksActions.loadItemsSuccess, (state, action): TasksState => ({
         ...state,
-        items: action.tasks,
+        items: action.items,
     })),
     on(TasksActions.loadItemsFailure, (state, action): TasksState => ({
         ...state,
@@ -61,8 +61,10 @@ function updateItemDetails(list: Item[], editedItem: Item): Item[] {
 const getTasksFeatureState = createFeatureSelector<TasksState>('tasks');
 export const getAllTasks = createSelector(
     getTasksFeatureState,
-    state => state.items
+    (state) => state.items
 );
 
-export const getError = createSelector(getTasksFeatureState,
-    (state) => state.error);
+export const getError = createSelector(
+    getTasksFeatureState,
+    (state) => state.error
+);
