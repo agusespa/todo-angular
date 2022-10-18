@@ -12,13 +12,14 @@
                     taskActive: item.done === false
                 }"
                     [for]="item.title"
+                    (click)="editable = !editable"
             >{{ item.title }}</label
             >
             <p class="dueDate" *ngIf="item.dueDate">{{ item.dueDate }}</p>
         </div>
         <div class="btnWrapper" *ngIf="!editable">
-            <button class="btn" (click)="editable = !editable">Edit</button>
-            <button class="btn btn-warn" (click)="remove.emit()">Delete</button>
+            <button class="btnEdit" (click)="editable = !editable">Edit</button>
+            <button class="btnDelete" (click)="remove.emit()">Delete</button>
         </div>
     </div>
 
@@ -42,9 +43,9 @@
                         (change)="setDate($event)"/>
             </div>
         </div>
-        <div class="btnWrapper">
+        <div class="editBtnWrapper">
             <button class="btn" (click)="editable = !editable">Cancel</button>
-            <button class="btn btn-save" (click)="saveItem(editedItem.value)">
+            <button class="btn" (click)="saveItem(editedItem.value)">
                 Save
             </button>
         </div>

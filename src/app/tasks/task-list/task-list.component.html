@@ -11,17 +11,17 @@
             </ng-container>
         </ul>
         <div class="new-item-box">
+            <button
+                    class="btn-primary"
+                    (click)="addItem(newItem.value); newItem.value = ''">
+                +
+            </button>
             <input
                 #newItem
                 placeholder="New item"
                 (keyup.enter)="addItem(newItem.value); newItem.value = ''"
                 class="lg-text-input"
                 id="addItemInput" />
-            <button
-                class="btn-primary"
-                (click)="addItem(newItem.value); newItem.value = ''">
-                Add
-            </button>
         </div>
     </div>
 </main>

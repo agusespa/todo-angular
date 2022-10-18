@@ -1,6 +1,7 @@
 .item {
     display: flex;
     flex-direction: column;
+    padding: .3rem;
 
     .dataWrapper {
         display: flex;
@@ -21,6 +22,7 @@
                 text-decoration: line-through;
                 margin: 0;
                 padding: 0;
+                cursor: text;
             }
 
             .taskActive {
@@ -28,6 +30,7 @@
                 text-decoration: none;
                 margin: 0;
                 padding: 0;
+                cursor: text;
             }
             
             .dueDate {
@@ -35,32 +38,80 @@
                 color: #fc0303;
                 margin: 0;
                 padding: 0;
+                cursor: default;
             }
         }
 
         .btnWrapper {
             display: flex;
             gap: 0.3rem;
+
+            button {
+                color: gray;
+                border: none;
+                border-radius: 0.2rem;
+                background-color: white;
+                cursor: pointer;
+                &:hover {
+                    color: black;
+                }
+            }
+            .btnEdit {
+
+            }
         }
     }
 
     .editWrapper {
         display: flex;
         flex-direction: column;
-        margin: 0.3rem 0 0 0;
+        margin: 1rem 0 0 0.3rem;
+        gap: 0.5rem;
+
+        label {
+            color: gray;
+            font-weight: normal;
+            font-size: 0.9rem;
+            margin: 0 0.5rem 0 0;
+        }
 
         .task {
             display: flex;
             flex-direction: row;
             margin: 0;
-            color: #f2f2f2f2;
+            input {
+                color: black;
+                border-radius: 0.2rem;
+                border: none;
+            }
         }
 
         .date {
             display: flex;
             flex-direction: row;
             margin: 0;
-            color: #f2f2f2f2;
+            input {
+                color: black;
+                border-radius: 0.2rem;
+                border: none;
+            }
+        }
+
+        .editBtnWrapper {
+            display: flex;
+            gap: 0.3rem;
+            margin: 0.5rem 0 0 0;
+
+            button {
+                color: gray;
+                border: none;
+                border-radius: 0.2rem;
+                background-color: white;
+                cursor: pointer;
+                &:hover {
+                    color: black;
+                }
+            }
         }
     }
 }
