@@ -56,8 +56,8 @@ export class TasksEffects {
         return this.actions$.pipe(
             ofType(TasksActions.editItem),
             concatMap((action) =>
-                this.tasksService.putTask(action.item).pipe(
-                    map((item) => TasksActions.editItemSuccess({ item })),
+                this.tasksService.putTask(action.editedItem).pipe(
+                    map((editedItem) => TasksActions.editItemSuccess({ editedItem })),
                     catchError(
                         (error) => of(TasksActions.editItemFailure({ error }))
                     )

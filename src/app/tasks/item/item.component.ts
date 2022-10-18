@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import {Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
 import {Store} from "@ngrx/store";
-import { TasksService } from "../tasks.service";
-import { Item } from "./item";
+import {TasksService} from "../tasks.service";
+import {Item} from "./item";
 import {State} from "../store/tasks.reducer";
 import {editItem} from "../store/tasks.actions";
 
@@ -13,32 +13,50 @@ import {editItem} from "../store/tasks.actions";
 export class ItemComponent implements OnInit {
     editable = false;
 
+    newDate: string;
+
     @Input() item: Item = {} as Item;
     @Output() remove = new EventEmitter<Item>();
 
-    constructor(private httpService: TasksService, private store: Store<State>) {}
+    // editedItem: Item = {
+    //     id: this.item.id,
+    //     title: this.item.title,
+    //     done: this.item.done,
+    //     dueDate: this.item.dueDate
+    // }
 
-    ngOnInit(): void {}
+    constructor(private httpService: TasksService, private store: Store<State>) {
+    }
+
+    ngOnInit(): void {
+    }
 
     saveItem(title: string): void {
-        this.item.title = title;
-        const item = this.item;
-        this.store.dispatch(editItem({item}));
-        this.httpService.putTask(this.item).subscribe();
+        const editedItem: Item = {
+            id: this.item.id,
+            title: title,
+            done: this.item.done,
+            dueDate: this.newDate
+        }
+        this.store.dispatch(editItem({editedItem}));
+
+        // this.editedItem.title = title;
+        // this.store.dispatch(editItem({this.editedItem}));
 
         this.editable = false;
     }
 
     checkIsDone(event: Event): void {
-        const status = (<HTMLInputElement>event.target).checked;
-        this.item.done = status;
-        const item = this.item;
-        this.store.dispatch(editItem({item}));
-        this.httpService.putTask(this.item).subscribe();
+        const editedItem: Item = {
+            id: this.item.id,
+            title: this.item.title,
+            done: (<HTMLInputElement>event.target).checked,
+            dueDate: this.item.dueDate
+        }
+        this.store.dispatch(editItem({editedItem}));
     }
 
     setDate(event: Event): void {
-        const date = (<HTMLInputElement>event.target).value;
-        this.item.dueDate = date;
+        this.newDate = (<HTMLInputElement>event.target).value;
     }
 }

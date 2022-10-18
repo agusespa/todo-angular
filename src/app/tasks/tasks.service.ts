@@ -24,8 +24,8 @@ export class TasksService {
         );
     }
 
-    putTask(item: Item) {
-        return this.http.put<Item>(this.url, item);
+    putTask(editedItem: Item) {
+        return this.http.put<Item>(this.url, editedItem);
     }
 
     deleteTask(id: number) {

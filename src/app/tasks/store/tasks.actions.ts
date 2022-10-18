@@ -42,13 +42,12 @@ export const deleteItemFailure = createAction(
 
 export const editItem = createAction(
     "[Tasks] Edit todo item",
-    props<{ item: Item }>()
+    props<{ editedItem: Item }>()
 );
 export const editItemSuccess = createAction(
     '[Tasks] Edit item Success',
-    props<{ item: Item }>()
+    props<{ editedItem: Item }>()
 );
-
 export const editItemFailure = createAction(
     '[Tasks] Edit item Failure',
     props<{ error: string }>()
