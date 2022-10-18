@@ -1,13 +1,13 @@
 import {Injectable} from "@angular/core";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {concatMap, map, mergeMap} from "rxjs/operators";
-import {TasksService} from "../tasks.service";
+import {TasksAPIService} from "../tasksAPI.service";
 import * as TasksActions from "./tasks.actions";
 import {catchError, of} from "rxjs";
 
 @Injectable()
 export class TasksEffects {
-    constructor(private actions$: Actions, private tasksService: TasksService) {
+    constructor(private actions$: Actions, private tasksService: TasksAPIService) {
     }
 
     loadTasks$ = createEffect(() => {

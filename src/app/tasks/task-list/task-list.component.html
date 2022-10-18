@@ -1,8 +1,8 @@
 <main>
-    <app-sidebar></app-sidebar>
+    <app-sidebar [activeFilter]="activeFilter$ | async"></app-sidebar>
 
     <div class="tasks">
-        <h3>Tasks</h3>
+        <h3>TASKS</h3>
         <ul>
             <ng-container *ngFor="let i of items$ | async">
                 <li>

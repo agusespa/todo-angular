@@ -32,8 +32,9 @@ main {
             align-self: flex-start;
         }
         h3 {
-            font-size: 1.2rem;
-            color: #ff0000;
+            font-size: 1.3rem;
+            font-weight: normal;
+            color: black;
             margin: 0 0 1rem 0;
         }
 
@@ -45,12 +46,14 @@ main {
             margin-top: 1rem;
 
             .lg-text-input {
-                background-color: #cccccc;
+                background-color: transparent;
                 width: 100%;
                 padding: 0.5rem;
-                border: none;
+                border-top: none;
+                border-right: none;
+                border-left: none;
+                border-bottom: 1px solid darkgray;
                 font-size: 1rem;
-                border-radius: 0.3rem;
                 margin: 0;
             }
 
@@ -75,14 +78,14 @@ main {
             width: 100%;
             margin: 0;
             padding: 0;
-            gap: 0.3rem;
+            gap: 0.4rem;
 
             li {
                 list-style: none;
-                background-color: #1a1a1a;
+                background-color: #f2f2f2;
                 padding: 0.5rem;
                 border: none;
-                border-radius: 0.2rem;
+                border-radius: 0.1rem;
             }
         }
     }

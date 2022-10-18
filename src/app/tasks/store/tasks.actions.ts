@@ -52,3 +52,8 @@ export const editItemFailure = createAction(
     '[Tasks] Edit item Failure',
     props<{ error: string }>()
 );
+
+export const setActiveFilter = createAction(
+    '[Tasks] Set active filter',
+    props<{ filter: string }>()
+);

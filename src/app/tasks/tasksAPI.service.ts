@@ -7,7 +7,7 @@ import {catchError, Observable, tap, throwError} from "rxjs";
 @Injectable({
     providedIn: "root",
 })
-export class TasksService {
+export class TasksAPIService {
     private url = "http://localhost:8080/tasks";
 
     constructor(private http: HttpClient) {}

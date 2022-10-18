@@ -3,7 +3,7 @@ import {Store} from "@ngrx/store";
 import {Item} from "../item/item";
 import {ItemDto} from "../item/itemDto";
 import * as TasksActions from "../store/tasks.actions";
-import {getAllTasks, getError, State} from "../store/tasks.reducer";
+import {getTasks, getError, getFilter, State} from "../store/tasks.reducer";
 import {Observable} from "rxjs";
 
 @Component({
@@ -13,32 +13,24 @@ import {Observable} from "rxjs";
 })
 export class TaskList implements OnInit {
 
-    currentDate = new Date();
-
     items$: Observable<Item[]>;
+
     errorMessage$: Observable<string>;
+
+    activeFilter$: Observable<string>;
 
     constructor(private store: Store<State>) {
     }
 
     ngOnInit() {
-        this.items$ = this.store.select(getAllTasks);
+        this.items$ = this.store.select(getTasks);
 
         this.errorMessage$ = this.store.select(getError);
 
+        this.activeFilter$ = this.store.select(getFilter);
+
         this.store.dispatch(TasksActions.loadItems());
     }
-
-    //filterItems(filter: string): void {
-    //if (filter === "active") this.filteredItems = this.getActiveItems();
-    //else if (filter === "completed")
-    //this.filteredItems = this.getCompletedItems();
-    //else if (filter === "today") {
-    //this.filteredItems = this.getTodaysItems();
-    //} else if (filter === "overdue") {
-    //this.filteredItems = this.getOverdueItems();
-    //} else this.filteredItems = this.items;
-    //}
 
     addItem(title: string): void {
         const itemDto: ItemDto = {
@@ -52,44 +44,4 @@ export class TaskList implements OnInit {
         const id = item.id;
         this.store.dispatch(TasksActions.deleteItem({id}));
     }
-
-    //getActiveItems(): Item[] {
-    //return this.items.filter((i) => i.done === false);
-    //}
-
-    //getCompletedItems(): Item[] {
-    //return this.items.filter((i) => i.done === true);
-    //}
-
-    //getTodaysItems(): Item[] {
-    //return this.items.filter(
-    //(i) =>
-    //i.done === false &&
-    //i.dueDate !== null &&
-    //i.dueDate !== undefined &&
-    //new Date(i.dueDate).setHours(0, 0, 0, 0) ===
-    //this.currentDate.setHours(0, 0, 0, 0)
-    //);
-    //}
-
-    //getOverdueItems(): Item[] {
-    //return this.items.filter(
-    //(i) =>
-    //i.done === false &&
-    //i.dueDate !== null &&
-    //i.dueDate !== undefined &&
-    //new Date(i.dueDate).setHours(0, 0, 0, 0) <
-    //this.currentDate.setHours(0, 0, 0, 0)
-    //);
-    //}
-
-    //buildItemSummary(): void {
-    //this.itemSummary = {
-    //today: this.getTodaysItems().length,
-    //active: this.getActiveItems().length,
-    //all: this.items.length,
-    //overdue: this.getOverdueItems().length,
-    //completed: this.getCompletedItems().length,
-    //};
-    //}
 }

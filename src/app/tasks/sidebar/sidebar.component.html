@@ -1,42 +1,42 @@
 <nav>
     <button
-        (click)="filterItems('today')"
-        [ngClass]="{
-            activeFilter: activeFilter === 'today',
-            inactiveFilter: activeFilter !== 'today'
-        }">
-        Today {{ itemSummary.today }}
-    </button>
-    <button
-        (click)="filterItems('active')"
-        [ngClass]="{
-            activeFilter: activeFilter === 'active',
-            inactiveFilter: activeFilter !== 'active'
-        }">
-        Active {{ itemSummary.active }}
-    </button>
-    <button
-        (click)="filterItems('all')"
-        [ngClass]="{
+            (click)="filterItems('all')"
+            [ngClass]="{
             activeFilter: activeFilter === 'all',
             inactiveFilter: activeFilter !== 'all'
         }">
-        All {{ itemSummary.all }}
+        All {{ (allItems$ | async)?.length }}
     </button>
     <button
-        (click)="filterItems('overdue')"
-        [ngClass]="{
+            (click)="filterItems('today')"
+            [ngClass]="{
+            activeFilter: activeFilter === 'today',
+            inactiveFilter: activeFilter !== 'today'
+        }">
+        Today {{ (todaysItems$ | async)?.length }}
+    </button>
+    <button
+            (click)="filterItems('active')"
+            [ngClass]="{
+            activeFilter: activeFilter === 'active',
+            inactiveFilter: activeFilter !== 'active'
+        }">
+        Active {{ (activeItems$ | async)?.length }}
+    </button>
+    <button
+            (click)="filterItems('overdue')"
+            [ngClass]="{
             activeFilter: activeFilter === 'overdue',
             inactiveFilter: activeFilter !== 'overdue'
         }">
-        Overdue {{ itemSummary.overdue }}
+        Overdue {{ (overdueItems$ | async)?.length }}
     </button>
     <button
-        (click)="filterItems('completed')"
-        [ngClass]="{
+            (click)="filterItems('completed')"
+            [ngClass]="{
             activeFilter: activeFilter === 'completed',
             inactiveFilter: activeFilter !== 'completed'
         }">
-        Completed {{ itemSummary.completed }}
+        Completed {{ (completedItems$ | async)?.length }}
     </button>
 </nav>

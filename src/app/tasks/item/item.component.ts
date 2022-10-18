@@ -1,6 +1,6 @@
 import {Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
 import {Store} from "@ngrx/store";
-import {TasksService} from "../tasks.service";
+import {TasksAPIService} from "../tasksAPI.service";
 import {Item} from "./item";
 import {State} from "../store/tasks.reducer";
 import {editItem} from "../store/tasks.actions";
@@ -15,7 +15,7 @@ export class ItemComponent implements OnInit {
 
     newDate: string;
 
-    @Input() item: Item = {} as Item;
+    @Input() item: Item;
     @Output() remove = new EventEmitter<Item>();
 
     // editedItem: Item = {
@@ -25,7 +25,7 @@ export class ItemComponent implements OnInit {
     //     dueDate: this.item.dueDate
     // }
 
-    constructor(private httpService: TasksService, private store: Store<State>) {
+    constructor(private httpService: TasksAPIService, private store: Store<State>) {
     }
 
     ngOnInit(): void {
