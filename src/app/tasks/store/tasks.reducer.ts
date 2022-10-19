@@ -59,6 +59,10 @@ export const tasksReducer = createReducer<TasksState>(
     on(TasksActions.setActiveFilter, (state, action): TasksState => ({
         ...state,
         filter: action.filter
+    })),
+    on(TasksActions.deleteError, (state): TasksState => ({
+        ...state,
+        error: ''
     }))
 );
 

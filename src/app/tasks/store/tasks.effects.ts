@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Actions, createEffect, ofType} from "@ngrx/effects";
+import {Actions, createEffect, Effect, ofType} from "@ngrx/effects";
 import {concatMap, map, mergeMap} from "rxjs/operators";
 import {TasksAPIService} from "../tasksAPI.service";
 import * as TasksActions from "./tasks.actions";

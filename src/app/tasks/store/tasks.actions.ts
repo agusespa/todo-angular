@@ -57,3 +57,7 @@ export const setActiveFilter = createAction(
     '[Tasks] Set active filter',
     props<{ filter: string }>()
 );
+
+export const deleteError = createAction(
+    '[Tasks] Delete error'
+)

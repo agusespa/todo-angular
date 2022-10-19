@@ -11,17 +11,23 @@
             </ng-container>
         </ul>
         <div class="new-item-box">
+            <input
+                #newItem
+                placeholder="Add a task"
+                (keyup.enter)="addItem(newItem.value); newItem.value = ''"
+                class="lg-text-input"
+                id="addItemInput"/>
             <button
                     class="btn-primary"
                     (click)="addItem(newItem.value); newItem.value = ''">
                 +
             </button>
-            <input
-                #newItem
-                placeholder="New item"
-                (keyup.enter)="addItem(newItem.value); newItem.value = ''"
-                class="lg-text-input"
-                id="addItemInput" />
+        </div>
+    </div>
+
+    <div class="notificationContainer" *ngIf="errorMessage$ | async as error">
+        <div class="errorNotification"><p>{{ error }}</p>
+            <button (click)="removeErrorMessage()">Dismiss</button>
         </div>
     </div>
 </main>

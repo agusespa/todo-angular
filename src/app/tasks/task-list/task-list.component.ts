@@ -44,4 +44,8 @@ export class TaskList implements OnInit {
         const id = item.id;
         this.store.dispatch(TasksActions.deleteItem({id}));
     }
+
+    removeErrorMessage(): void {
+        this.store.dispatch(TasksActions.deleteError());
+    }
 }
