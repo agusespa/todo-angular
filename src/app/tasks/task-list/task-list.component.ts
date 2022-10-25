@@ -23,13 +23,10 @@ export class TaskList implements OnInit {
     }
 
     ngOnInit() {
-        this.items$ = this.store.select(getTasks);
-
-        this.errorMessage$ = this.store.select(getError);
-
-        this.activeFilter$ = this.store.select(getFilter);
-
         this.store.dispatch(TasksActions.loadItems());
+        this.items$ = this.store.select(getTasks);
+        this.errorMessage$ = this.store.select(getError);
+        this.activeFilter$ = this.store.select(getFilter);
     }
 
     addItem(title: string): void {

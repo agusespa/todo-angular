@@ -21,11 +21,11 @@ export class SidebarComponent implements OnInit {
     @Input() activeFilter: string | null;
     @Output() filterClick = new EventEmitter<string>();
 
-    allItems$: Observable<Item[]>;
-    todaysItems$: Observable<Item[]>;
-    activeItems$: Observable<Item[]>;
-    completedItems$: Observable<Item[]>;
-    overdueItems$: Observable<Item[]>;
+    allItems$: Observable<number>;
+    todaysItems$: Observable<number>;
+    activeItems$: Observable<number>;
+    completedItems$: Observable<number>;
+    overdueItems$: Observable<number>;
 
     constructor(private store: Store<State>) {
     }
@@ -39,6 +39,10 @@ export class SidebarComponent implements OnInit {
     }
 
     filterItems(filter: string) {
+        this.store.dispatch(setActiveFilter({filter}));
+    }
+
+    handleSearch(filter: string) {
         this.store.dispatch(setActiveFilter({filter}));
     }
 }
