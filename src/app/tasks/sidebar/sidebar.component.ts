@@ -9,7 +9,6 @@ import {
     State
 } from "../store/tasks.reducer";
 import {setActiveFilter} from "../store/tasks.actions";
-import {Item} from "../item/item";
 import {Observable} from "rxjs";
 
 @Component({
@@ -19,7 +18,7 @@ import {Observable} from "rxjs";
 })
 export class SidebarComponent implements OnInit {
     @Input() activeFilter: string | null;
-    @Output() filterClick = new EventEmitter<string>();
+    @Output() searchItems = new EventEmitter<Event>();
 
     allItems$: Observable<number>;
     todaysItems$: Observable<number>;
@@ -42,7 +41,9 @@ export class SidebarComponent implements OnInit {
         this.store.dispatch(setActiveFilter({filter}));
     }
 
-    handleSearch(filter: string) {
-        this.store.dispatch(setActiveFilter({filter}));
+    // double binding??
+    setSearchTerm() {
+        this.searchItems.emit();
     }
+
 }

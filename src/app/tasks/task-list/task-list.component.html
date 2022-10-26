@@ -1,5 +1,5 @@
 <main>
-    <app-sidebar [activeFilter]="activeFilter$ | async"></app-sidebar>
+    <app-sidebar (searchItems)="searchItems($event)" [activeFilter]="activeFilter$ | async"></app-sidebar>
 
     <div class="tasks">
         <h3>TASKS</h3>

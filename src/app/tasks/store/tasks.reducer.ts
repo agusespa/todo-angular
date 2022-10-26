@@ -3,7 +3,6 @@ import * as TasksActions from "./tasks.actions";
 import {Item} from "../item/item";
 import * as AppState from "../../app.state";
 import * as TasksUtils from "../tasks.utils";
-import {filter} from "rxjs";
 
 export interface State extends AppState.State {
     tasks: TasksState

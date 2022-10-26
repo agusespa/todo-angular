@@ -4,7 +4,8 @@ import {Item} from "../item/item";
 import {ItemDto} from "../item/itemDto";
 import * as TasksActions from "../store/tasks.actions";
 import {getTasks, getError, getFilter, State} from "../store/tasks.reducer";
-import {Observable} from "rxjs";
+import {filter, Observable} from "rxjs";
+import {map} from "rxjs/operators";
 
 @Component({
     selector: "app-tasks",
@@ -44,5 +45,13 @@ export class TaskList implements OnInit {
 
     removeErrorMessage(): void {
         this.store.dispatch(TasksActions.deleteError());
+    }
+
+    searchItems(event: Event): void {
+        const term = "d";
+        this.items$ = this.items$.pipe(
+            map(items => items.filter(i => i.title.toLowerCase().includes(term.toLowerCase()))
+            )
+        );
     }
 }
