@@ -1,49 +1,48 @@
 <nav>
     <button
-            (click)="filterItems('all')"
-            [ngClass]="{
+        (click)="filterItems('all')"
+        [ngClass]="{
             activeFilter: activeFilter === 'all',
             inactiveFilter: activeFilter !== 'all'
         }">
         All ({{ allItems$ | async }})
     </button>
     <button
-            (click)="filterItems('today')"
-            [ngClass]="{
+        (click)="filterItems('today')"
+        [ngClass]="{
             activeFilter: activeFilter === 'today',
             inactiveFilter: activeFilter !== 'today'
         }">
         Today ({{ todaysItems$ | async }})
     </button>
     <button
-            (click)="filterItems('active')"
-            [ngClass]="{
+        (click)="filterItems('active')"
+        [ngClass]="{
             activeFilter: activeFilter === 'active',
             inactiveFilter: activeFilter !== 'active'
         }">
         Active ({{ activeItems$ | async }})
     </button>
     <button
-            (click)="filterItems('overdue')"
-            [ngClass]="{
+        (click)="filterItems('overdue')"
+        [ngClass]="{
             activeFilter: activeFilter === 'overdue',
             inactiveFilter: activeFilter !== 'overdue'
         }">
         Overdue ({{ overdueItems$ | async }})
     </button>
     <button
-            (click)="filterItems('completed')"
-            [ngClass]="{
+        (click)="filterItems('completed')"
+        [ngClass]="{
             activeFilter: activeFilter === 'completed',
             inactiveFilter: activeFilter !== 'completed'
         }">
         Completed ({{ completedItems$ | async }})
     </button>
     <input
-            type="text"
-            (click)="filterItems('search')"
-            placeholder="search"
-            [(ngModel)]="searchTerm"
-            (input)="onSearchTermChange()"
-    />
+        type="text"
+        (click)="filterItems('search')"
+        placeholder="search"
+        [(ngModel)]="searchTerm"
+        (input)="onSearchTermChange()" />
 </nav>

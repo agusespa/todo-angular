@@ -2,24 +2,27 @@
     <div class="dataWrapper">
         <div class="taskWrapper">
             <input
-                    class="checkbox"
-                    type="checkbox"
-                    (change)="checkIsDone($event)"
-                    [checked]="item.done"/>
+                class="checkbox"
+                type="checkbox"
+                (change)="checkIsDone($event)"
+                [checked]="item.done" />
             <label
-                    [ngClass]="{
+                [ngClass]="{
                     taskDone: item.done === true,
                     taskActive: item.done === false
                 }"
-                    [for]="item.title"
-                    (click)="editable = !editable"
-            >{{ item.title }}</label>
-            <p *ngIf="item.dueDate"
-               [ngClass]="{
-               dueDate: itemDate >= currentDate,
-               dueDateOverdue: itemDate < currentDate
-               }"
-            >due on {{ item.dueDate | date}}</p>
+                [for]="item.title"
+                (click)="editable = !editable"
+                >{{ item.title }}</label
+            >
+            <p
+                *ngIf="item.dueDate"
+                [ngClass]="{
+                    dueDate: itemDate >= currentDate,
+                    dueDateOverdue: itemDate < currentDate
+                }">
+                due on {{ item.dueDate | date }}
+            </p>
         </div>
         <div class="btnWrapper" *ngIf="!editable">
             <button class="btnEdit" (click)="editable = !editable">Edit</button>
@@ -31,20 +34,20 @@
         <div class="task">
             <label for="taskInput">Title:</label>
             <input
-                    id="taskInput"
-                    placeholder="edit item"
-                    [value]="item.title"
-                    #editedItem
-                    (keyup.enter)="saveItem(editedItem.value)"/>
+                id="taskInput"
+                placeholder="edit item"
+                [value]="item.title"
+                #editedItem
+                (keyup.enter)="saveItem(editedItem.value)" />
         </div>
         <div class="date">
             <div class="newDate">
                 <label for="dueDate">Due date:</label>
                 <input
-                        id="dueDate"
-                        type="date"
-                        [value]="item.dueDate"
-                        (change)="setDate($event)"/>
+                    id="dueDate"
+                    type="date"
+                    [value]="item.dueDate"
+                    (change)="setDate($event)" />
             </div>
         </div>
         <div class="editBtnWrapper">

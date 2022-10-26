@@ -1,6 +1,6 @@
-import {Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
-import {Store} from "@ngrx/store";
-import {Observable} from "rxjs";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { Store } from "@ngrx/store";
+import { Observable } from "rxjs";
 
 import {
     getActiveTasks,
@@ -8,9 +8,9 @@ import {
     getCompletedTasks,
     getOverdueTasks,
     getTodaysTasks,
-    State
+    State,
 } from "../store/tasks.reducer";
-import {setActiveFilter} from "../store/tasks.actions";
+import { setActiveFilter } from "../store/tasks.actions";
 
 @Component({
     selector: "app-sidebar",
@@ -18,7 +18,6 @@ import {setActiveFilter} from "../store/tasks.actions";
     styleUrls: ["./sidebar.component.scss"],
 })
 export class SidebarComponent implements OnInit {
-
     searchTerm = "";
 
     @Input() activeFilter: string | null;
@@ -30,8 +29,7 @@ export class SidebarComponent implements OnInit {
     completedItems$: Observable<number>;
     overdueItems$: Observable<number>;
 
-    constructor(private store: Store<State>) {
-    }
+    constructor(private store: Store<State>) {}
 
     ngOnInit(): void {
         this.allItems$ = this.store.select(getAllTasks);
@@ -42,11 +40,10 @@ export class SidebarComponent implements OnInit {
     }
 
     filterItems(filter: string) {
-        this.store.dispatch(setActiveFilter({filter}));
+        this.store.dispatch(setActiveFilter({ filter }));
     }
 
     onSearchTermChange() {
         this.searchTermChanged.emit(this.searchTerm);
     }
-
 }

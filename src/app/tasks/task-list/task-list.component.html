@@ -1,11 +1,17 @@
 <main>
-    <app-sidebar (searchTermChanged)="setSearchTerm($event)" [activeFilter]="activeFilter$ | async"></app-sidebar>
+    <app-sidebar
+        (searchTermChanged)="setSearchTerm($event)"
+        [activeFilter]="activeFilter$ | async"></app-sidebar>
 
     <div class="tasks">
         <h3>TASKS</h3>
         <ul>
             <ng-container *ngFor="let i of items$ | async">
-                <li *ngIf="searchTerm === '' || i.title.toLowerCase().includes(searchTerm.toLowerCase())">
+                <li
+                    *ngIf="
+                        searchTerm === '' ||
+                        i.title.toLowerCase().includes(searchTerm.toLowerCase())
+                    ">
                     <app-item (remove)="remove(i)" [item]="i"></app-item>
                 </li>
             </ng-container>
@@ -16,17 +22,18 @@
                 placeholder="Add a task"
                 (keyup.enter)="addItem(newItem.value); newItem.value = ''"
                 class="lg-text-input"
-                id="addItemInput"/>
+                id="addItemInput" />
             <button
-                    class="btn-primary"
-                    (click)="addItem(newItem.value); newItem.value = ''">
+                class="btn-primary"
+                (click)="addItem(newItem.value); newItem.value = ''">
                 +
             </button>
         </div>
     </div>
 
     <div class="notificationContainer" *ngIf="errorMessage$ | async as error">
-        <div class="errorNotification"><p>{{ error }}</p>
+        <div class="errorNotification">
+            <p>{{ error }}</p>
             <button (click)="removeErrorMessage()">Dismiss</button>
         </div>
     </div>

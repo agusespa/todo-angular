@@ -1,11 +1,11 @@
-import {Component, OnInit} from "@angular/core";
-import {Store} from "@ngrx/store";
-import {Item} from "../item/item";
-import {ItemDto} from "../item/itemDto";
+import { Component, OnInit } from "@angular/core";
+import { Store } from "@ngrx/store";
+import { Item } from "../item/item";
+import { ItemDto } from "../item/itemDto";
 import * as TasksActions from "../store/tasks.actions";
-import {getTasks, getError, getFilter, State} from "../store/tasks.reducer";
-import {filter, Observable} from "rxjs";
-import {map} from "rxjs/operators";
+import { getTasks, getError, getFilter, State } from "../store/tasks.reducer";
+import { filter, Observable } from "rxjs";
+import { map } from "rxjs/operators";
 
 @Component({
     selector: "app-tasks",
@@ -13,7 +13,6 @@ import {map} from "rxjs/operators";
     styleUrls: ["./task-list.component.scss"],
 })
 export class TaskList implements OnInit {
-
     searchTerm = "";
 
     items$: Observable<Item[]>;
@@ -22,8 +21,7 @@ export class TaskList implements OnInit {
 
     activeFilter$: Observable<string>;
 
-    constructor(private store: Store<State>) {
-    }
+    constructor(private store: Store<State>) {}
 
     ngOnInit() {
         this.store.dispatch(TasksActions.loadItems());
@@ -37,12 +35,12 @@ export class TaskList implements OnInit {
             title,
             done: false,
         };
-        this.store.dispatch(TasksActions.createItem({itemDto}));
+        this.store.dispatch(TasksActions.createItem({ itemDto }));
     }
 
     remove(item: Item): void {
         const id = item.id;
-        this.store.dispatch(TasksActions.deleteItem({id}));
+        this.store.dispatch(TasksActions.deleteItem({ id }));
     }
 
     removeErrorMessage(): void {
@@ -52,6 +50,7 @@ export class TaskList implements OnInit {
     setSearchTerm(term: string) {
         this.searchTerm = term;
     }
+
     // searchItems(term: string): void {
     //     this.items$ = this.items$.pipe(
     //         map(items => items.filter(i => i.title.toLowerCase().includes(term.toLowerCase()))
