@@ -1,5 +1,7 @@
 import {Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
 import {Store} from "@ngrx/store";
+import {Observable} from "rxjs";
+
 import {
     getActiveTasks,
     getAllTasks,
@@ -9,7 +11,6 @@ import {
     State
 } from "../store/tasks.reducer";
 import {setActiveFilter} from "../store/tasks.actions";
-import {Observable} from "rxjs";
 
 @Component({
     selector: "app-sidebar",
