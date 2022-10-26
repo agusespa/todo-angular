@@ -14,6 +14,8 @@ import {map} from "rxjs/operators";
 })
 export class TaskList implements OnInit {
 
+    searchTerm = "";
+
     items$: Observable<Item[]>;
 
     errorMessage$: Observable<string>;
@@ -47,11 +49,13 @@ export class TaskList implements OnInit {
         this.store.dispatch(TasksActions.deleteError());
     }
 
-    searchItems(event: Event): void {
-        const term = "d";
-        this.items$ = this.items$.pipe(
-            map(items => items.filter(i => i.title.toLowerCase().includes(term.toLowerCase()))
-            )
-        );
+    setSearchTerm(term: string) {
+        this.searchTerm = term;
     }
+    // searchItems(term: string): void {
+    //     this.items$ = this.items$.pipe(
+    //         map(items => items.filter(i => i.title.toLowerCase().includes(term.toLowerCase()))
+    //         )
+    //     );
+    // }
 }

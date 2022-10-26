@@ -17,8 +17,11 @@ import {Observable} from "rxjs";
     styleUrls: ["./sidebar.component.scss"],
 })
 export class SidebarComponent implements OnInit {
+
+    searchTerm = "";
+
     @Input() activeFilter: string | null;
-    @Output() searchItems = new EventEmitter<Event>();
+    @Output() searchTermChanged = new EventEmitter<string>();
 
     allItems$: Observable<number>;
     todaysItems$: Observable<number>;
@@ -41,9 +44,8 @@ export class SidebarComponent implements OnInit {
         this.store.dispatch(setActiveFilter({filter}));
     }
 
-    // double binding??
-    setSearchTerm() {
-        this.searchItems.emit();
+    onSearchTermChange() {
+        this.searchTermChanged.emit(this.searchTerm);
     }
 
 }

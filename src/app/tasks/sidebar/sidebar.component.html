@@ -40,6 +40,10 @@
         Completed ({{ completedItems$ | async }})
     </button>
     <input
-        (click)="filterItems('search')"
-        placeholder="search"/>
+            type="text"
+            (click)="filterItems('search')"
+            placeholder="search"
+            [(ngModel)]="searchTerm"
+            (input)="onSearchTermChange()"
+    />
 </nav>
