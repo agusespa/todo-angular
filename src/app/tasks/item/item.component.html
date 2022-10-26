@@ -13,9 +13,13 @@
                 }"
                     [for]="item.title"
                     (click)="editable = !editable"
-            >{{ item.title }}</label
-            >
-            <p class="dueDate" *ngIf="item.dueDate">{{ item.dueDate }}</p>
+            >{{ item.title }}</label>
+            <p *ngIf="item.dueDate"
+               [ngClass]="{
+               dueDate: itemDate >= currentDate,
+               dueDateOverdue: itemDate < currentDate
+               }"
+            >due on {{ item.dueDate | date}}</p>
         </div>
         <div class="btnWrapper" *ngIf="!editable">
             <button class="btnEdit" (click)="editable = !editable">Edit</button>

@@ -35,10 +35,18 @@
             
             .dueDate {
                 font-size: 0.8rem;
-                color: #fc0303;
                 margin: 0;
                 padding: 0;
                 cursor: default;
+                color: blue;
+            }
+
+            .dueDateOverdue {
+                font-size: 0.8rem;
+                margin: 0;
+                padding: 0;
+                cursor: default;
+                color: #fc0303;
             }
         }
 

@@ -10,13 +10,15 @@ import {editItem} from "../store/tasks.actions";
     templateUrl: "./item.component.html",
     styleUrls: ["./item.component.scss"],
 })
-export class ItemComponent {
+export class ItemComponent implements OnInit {
+    @Input() item: Item;
+    @Output() remove = new EventEmitter<Item>();
+
     editable = false;
 
     newDate: string;
-
-    @Input() item: Item;
-    @Output() remove = new EventEmitter<Item>();
+    currentDate: number;
+    itemDate: number;
 
     // editedItem: Item = {
     //     id: this.item.id,
@@ -26,6 +28,13 @@ export class ItemComponent {
     // }
 
     constructor(private httpService: TasksAPIService, private store: Store<State>) {
+    }
+
+    ngOnInit(): void {
+        this.currentDate = new Date().setHours(0, 0, 0, 0);
+        if (this.item.dueDate) {
+            this.itemDate = new Date(this.item.dueDate).setHours(0, 0, 0, 0);
+        }
     }
 
     saveItem(title: string): void {
