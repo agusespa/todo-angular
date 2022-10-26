@@ -10,7 +10,7 @@ import {editItem} from "../store/tasks.actions";
     templateUrl: "./item.component.html",
     styleUrls: ["./item.component.scss"],
 })
-export class ItemComponent implements OnInit {
+export class ItemComponent {
     editable = false;
 
     newDate: string;
@@ -26,9 +26,6 @@ export class ItemComponent implements OnInit {
     // }
 
     constructor(private httpService: TasksAPIService, private store: Store<State>) {
-    }
-
-    ngOnInit(): void {
     }
 
     saveItem(title: string): void {
