@@ -9,7 +9,6 @@ import {
     State
 } from "../store/tasks.reducer";
 import {setActiveFilter} from "../store/tasks.actions";
-import {Item} from "../item/item";
 import {Observable} from "rxjs";
 
 @Component({
@@ -18,14 +17,17 @@ import {Observable} from "rxjs";
     styleUrls: ["./sidebar.component.scss"],
 })
 export class SidebarComponent implements OnInit {
-    @Input() activeFilter: string | null;
-    @Output() filterClick = new EventEmitter<string>();
 
-    allItems$: Observable<Item[]>;
-    todaysItems$: Observable<Item[]>;
-    activeItems$: Observable<Item[]>;
-    completedItems$: Observable<Item[]>;
-    overdueItems$: Observable<Item[]>;
+    searchTerm = "";
+
+    @Input() activeFilter: string | null;
+    @Output() searchTermChanged = new EventEmitter<string>();
+
+    allItems$: Observable<number>;
+    todaysItems$: Observable<number>;
+    activeItems$: Observable<number>;
+    completedItems$: Observable<number>;
+    overdueItems$: Observable<number>;
 
     constructor(private store: Store<State>) {
     }
@@ -41,4 +43,9 @@ export class SidebarComponent implements OnInit {
     filterItems(filter: string) {
         this.store.dispatch(setActiveFilter({filter}));
     }
+
+    onSearchTermChange() {
+        this.searchTermChanged.emit(this.searchTerm);
+    }
+
 }

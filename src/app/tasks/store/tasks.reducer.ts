@@ -3,7 +3,6 @@ import * as TasksActions from "./tasks.actions";
 import {Item} from "../item/item";
 import * as AppState from "../../app.state";
 import * as TasksUtils from "../tasks.utils";
-import {filter} from "rxjs";
 
 export interface State extends AppState.State {
     tasks: TasksState
@@ -110,23 +109,24 @@ export const getTasks = createSelector(
     (state) => filterItems(state.items, state.filter)
 );
 
+// TODO: better way?
 export const getAllTasks = createSelector(
     getTasksFeatureState,
-    (state) => state.items
+    (state) => state.items.length
 );
 export const getActiveTasks = createSelector(
     getTasksFeatureState,
-    (state) => filterItems(state.items, "active")
+    (state) => filterItems(state.items, "active").length
 );
 export const getTodaysTasks = createSelector(
     getTasksFeatureState,
-    (state) => filterItems(state.items, "today")
+    (state) => filterItems(state.items, "today").length
 );
 export const getCompletedTasks = createSelector(
     getTasksFeatureState,
-    (state) => filterItems(state.items, "completed")
+    (state) => filterItems(state.items, "completed").length
 );
 export const getOverdueTasks = createSelector(
     getTasksFeatureState,
-    (state) => filterItems(state.items, "overdue")
+    (state) => filterItems(state.items, "overdue").length
 );

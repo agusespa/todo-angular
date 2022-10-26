@@ -4,7 +4,8 @@ import {Item} from "../item/item";
 import {ItemDto} from "../item/itemDto";
 import * as TasksActions from "../store/tasks.actions";
 import {getTasks, getError, getFilter, State} from "../store/tasks.reducer";
-import {Observable} from "rxjs";
+import {filter, Observable} from "rxjs";
+import {map} from "rxjs/operators";
 
 @Component({
     selector: "app-tasks",
@@ -12,6 +13,8 @@ import {Observable} from "rxjs";
     styleUrls: ["./task-list.component.scss"],
 })
 export class TaskList implements OnInit {
+
+    searchTerm = "";
 
     items$: Observable<Item[]>;
 
@@ -23,13 +26,10 @@ export class TaskList implements OnInit {
     }
 
     ngOnInit() {
-        this.items$ = this.store.select(getTasks);
-
-        this.errorMessage$ = this.store.select(getError);
-
-        this.activeFilter$ = this.store.select(getFilter);
-
         this.store.dispatch(TasksActions.loadItems());
+        this.items$ = this.store.select(getTasks);
+        this.errorMessage$ = this.store.select(getError);
+        this.activeFilter$ = this.store.select(getFilter);
     }
 
     addItem(title: string): void {
@@ -48,4 +48,14 @@ export class TaskList implements OnInit {
     removeErrorMessage(): void {
         this.store.dispatch(TasksActions.deleteError());
     }
+
+    setSearchTerm(term: string) {
+        this.searchTerm = term;
+    }
+    // searchItems(term: string): void {
+    //     this.items$ = this.items$.pipe(
+    //         map(items => items.filter(i => i.title.toLowerCase().includes(term.toLowerCase()))
+    //         )
+    //     );
+    // }
 }

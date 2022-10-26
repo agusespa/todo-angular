@@ -8,6 +8,7 @@ import {SidebarComponent} from "./sidebar/sidebar.component";
 import {ItemComponent} from "./item/item.component";
 import {EffectsModule} from "@ngrx/effects";
 import {TasksEffects} from "./store/tasks.effects";
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {TasksEffects} from "./store/tasks.effects";
     imports: [
         CommonModule,
         StoreModule.forFeature('tasks', tasksReducer),
-        EffectsModule.forFeature([TasksEffects])
+        EffectsModule.forFeature([TasksEffects]),
+        FormsModule
     ]
 })
 export class TasksModule {

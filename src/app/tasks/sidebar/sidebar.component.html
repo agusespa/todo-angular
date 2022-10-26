@@ -5,7 +5,7 @@
             activeFilter: activeFilter === 'all',
             inactiveFilter: activeFilter !== 'all'
         }">
-        All ({{ (allItems$ | async)?.length }})
+        All ({{ allItems$ | async }})
     </button>
     <button
             (click)="filterItems('today')"
@@ -13,7 +13,7 @@
             activeFilter: activeFilter === 'today',
             inactiveFilter: activeFilter !== 'today'
         }">
-        Today ({{ (todaysItems$ | async)?.length }})
+        Today ({{ todaysItems$ | async }})
     </button>
     <button
             (click)="filterItems('active')"
@@ -21,7 +21,7 @@
             activeFilter: activeFilter === 'active',
             inactiveFilter: activeFilter !== 'active'
         }">
-        Active ({{ (activeItems$ | async)?.length }})
+        Active ({{ activeItems$ | async }})
     </button>
     <button
             (click)="filterItems('overdue')"
@@ -29,7 +29,7 @@
             activeFilter: activeFilter === 'overdue',
             inactiveFilter: activeFilter !== 'overdue'
         }">
-        Overdue ({{ (overdueItems$ | async)?.length }})
+        Overdue ({{ overdueItems$ | async }})
     </button>
     <button
             (click)="filterItems('completed')"
@@ -37,6 +37,13 @@
             activeFilter: activeFilter === 'completed',
             inactiveFilter: activeFilter !== 'completed'
         }">
-        Completed ({{ (completedItems$ | async)?.length }})
+        Completed ({{ completedItems$ | async }})
     </button>
+    <input
+            type="text"
+            (click)="filterItems('search')"
+            placeholder="search"
+            [(ngModel)]="searchTerm"
+            (input)="onSearchTermChange()"
+    />
 </nav>
