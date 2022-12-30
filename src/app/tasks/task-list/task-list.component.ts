@@ -50,11 +50,4 @@ export class TaskList implements OnInit {
     setSearchTerm(term: string) {
         this.searchTerm = term;
     }
-
-    // searchItems(term: string): void {
-    //     this.items$ = this.items$.pipe(
-    //         map(items => items.filter(i => i.title.toLowerCase().includes(term.toLowerCase()))
-    //         )
-    //     );
-    // }
 }
